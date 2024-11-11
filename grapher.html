@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+
+<title></title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+
+<body>
+
+<canvas id="releaseTimeline"></canvas>
+
+<script>
+const releaseData = [
+  { year: 2021, title: "First Album" },
+  { year: 2022, title: "Second Album" },
+  { year: 2023, title: "Latest Single" },
+];
+
+  const ctx = document.getElementById("releaseTimeline").getContext("2d");
+  new Chart(ctx, {
+    type: "line",
+    data: {
+      labels: releaseData.map(item => item.year),
+      datasets: [{
+        label: "Releases",
+        data: releaseData.map(item => item.year),
+        pointBackgroundColor: "blue",
+        pointBorderColor: "black",
+        pointRadius: 5,
+        showLine: false,
+      }]
+    },
+    options: {
+      scales: {
+        x: {
+          title: { display: true, text: "Year" }
+        },
+        y: { display: false }
+      },
+      plugins: {
+        tooltip: {
+          callbacks: {
+            label: (context) => releaseData[context.dataIndex].title
+          }
+        }
+      }
+    }
+  });
+</script>
+
+</body>
+
+</html>
