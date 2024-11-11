@@ -13,22 +13,27 @@
 <body>
 
 <canvas id="releaseTimeline"></canvas>
-
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
 <script>
-const releaseData = [
-  { year: 2021, title: "First Album" },
-  { year: 2022, title: "Second Album" },
-  { year: 2023, title: "Latest Single" },
-];
+  const releaseData = [
+    { date: "2021-03-15", title: "First Album" },
+    { date: "2021-11-05", title: "Second Album" },
+    { date: "2022-06-21", title: "Third Album" },
+    { date: "2023-08-10", title: "Latest Single" },
+  ];
 
   const ctx = document.getElementById("releaseTimeline").getContext("2d");
   new Chart(ctx, {
-    type: "line",
+    type: "scatter",
     data: {
-      labels: releaseData.map(item => item.year),
       datasets: [{
         label: "Releases",
-        data: releaseData.map(item => item.year),
+        data: releaseData.map(item => ({
+          x: item.date,
+          y: 1, // Arbitrary y-value since we're only interested in date positioning
+          title: item.title
+        })),
         pointBackgroundColor: "blue",
         pointBorderColor: "black",
         pointRadius: 5,
@@ -38,14 +43,27 @@ const releaseData = [
     options: {
       scales: {
         x: {
-          title: { display: true, text: "Year" }
+          type: 'time',
+          time: {
+            unit: 'month', // Choose the unit granularity
+            tooltipFormat: 'MMMM dd, yyyy', // Format for tooltip dates
+            displayFormats: {
+              month: 'MMM yyyy' // Format for x-axis labels
+            }
+          },
+          title: {
+            display: true,
+            text: "Release Date"
+          }
         },
-        y: { display: false }
+        y: {
+          display: false // Hide y-axis
+        }
       },
       plugins: {
         tooltip: {
           callbacks: {
-            label: (context) => releaseData[context.dataIndex].title
+            label: (context) => context.raw.title // Display album title in tooltip
           }
         }
       }
