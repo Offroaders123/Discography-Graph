@@ -1,0 +1,9 @@
+# Discography-Graph
+
+Rendering artist discography releases in a graph format!
+
+Okay, so for this project, it started while I was recently going on a Wikipedia rampage learning about the artists I listen to, and I was trying to figure out how the discography release date graphs were generated. I asked GPT to help decipher how to possibly make one, and it worked out great! Tweaked it here and there, and by this third version, there's something notable to build off of here! Having it just working altogether was outstanding, usually the bigger code concepts don't always "just work" when coming from the prompt. Now that I have a way to see this, I can build my own version with what I learned here, and maybe expand on it later down the road.
+
+I have been trying to figure out what works and doesn't work for me when writing music, like when I try to write too often, when I'm not in the creative spirit, and possibly reflect and find patterns that I tend to do which I may have the ability to improve upon.
+
+After having seen the graph for my releases, I noticed *just* how often I've been releasing. It really makes me think I need to relax a bit. This does line up with my music fatigue lately (in terms of writing), because I might not be giving myself enough time outside of creativity to be able to come up with new ideas to experiment with. Usually the albums I seem to be more happy with are the ones that had more time to fester, and more time to be finalized too. If it doesn't feel done yet, maybe let yourself take a break for a bit, not because you're tired or lazy or something (that's where my mind always goes; "I can just push though, deal with it!"), it's to let things happen naturally, rather than to try and make it up completely. I took a little break the last few weeks, and tonight's music really felt great.
