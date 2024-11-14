@@ -1,5 +1,5 @@
-import "../node_modules/chart.js/dist/chart.umd.js";
-import "../node_modules/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js";
+import "chartjs-adapter-date-fns";
+import { Chart } from "chart.js";
 
 const releaseData = [
   { date: "2016-08-23", title: "Made in merica" },
