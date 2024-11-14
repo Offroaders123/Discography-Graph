@@ -42,7 +42,7 @@ const releaseData = [
   { date: "2024-02-16", title: "(zein-zein)" },
 ];
 
-const ctx = document.getElementById("releaseTimeline").getContext("2d");
+const ctx: CanvasRenderingContext2D = document.querySelector<HTMLCanvasElement>("#releaseTimeline")!.getContext("2d")!;
 new Chart(ctx, {
   type: "scatter",
   data: {
@@ -82,7 +82,7 @@ new Chart(ctx, {
     plugins: {
       tooltip: {
         callbacks: {
-          label: (context) => context.raw.title // Display album title in tooltip
+          label: (context) => (context.raw as { x: string; y: number; title: string; }).title // Display album title in tooltip
         }
       }
     }
