@@ -6,40 +6,6 @@ Chart.register(...registerables, annotationPlugin);
 
 const ctx = document.getElementById('releaseTimeline').getContext('2d');
 
-// Data configuration
-const data = {
-  labels: [
-    'Vocals',
-    'Guitar',
-    'Keyboards',
-    'Bass',
-    'Drums',
-  ],
-  datasets: [
-    // Band Members
-    {
-      label: "Rod Tyler",
-      backgroundColor: 'red',
-      data: [{ x: '1994-01-01', y: 'Vocals', x2: '1995-01-01' }]
-    },
-    {
-      label: "Russell Allen",
-      backgroundColor: 'red',
-      data: [{ x: '1995-01-01', y: 'Vocals', x2: 'present' }]
-    },
-    {
-      label: "Michael Romeo",
-      backgroundColor: 'green',
-      data: [{ x: '1994-01-01', y: 'Guitar', x2: 'present' }]
-    },
-    {
-      label: "Michael Pinnella",
-      backgroundColor: 'purple',
-      data: [{ x: '1994-01-01', y: 'Keyboards', x2: 'present' }]
-    },
-  ]
-};
-
 function annotation({ type, date }: { type: "studio" | "other"; date: string; }) {
   switch (type) {
     case "studio": return {
@@ -76,7 +42,38 @@ function annotation({ type, date }: { type: "studio" | "other"; date: string; })
 // Render the chart
 new Chart(ctx, {
   type: 'bar',
-  data: data,
+  data: {
+    labels: [
+      'Vocals',
+      'Guitar',
+      'Keyboards',
+      'Bass',
+      'Drums',
+    ],
+    datasets: [
+      // Band Members
+      {
+        label: "Rod Tyler",
+        backgroundColor: 'red',
+        data: [{ x: '1994-01-01', y: 'Vocals', x2: '1995-01-01' }]
+      },
+      {
+        label: "Russell Allen",
+        backgroundColor: 'red',
+        data: [{ x: '1995-01-01', y: 'Vocals', x2: 'present' }]
+      },
+      {
+        label: "Michael Romeo",
+        backgroundColor: 'green',
+        data: [{ x: '1994-01-01', y: 'Guitar', x2: 'present' }]
+      },
+      {
+        label: "Michael Pinnella",
+        backgroundColor: 'purple',
+        data: [{ x: '1994-01-01', y: 'Keyboards', x2: 'present' }]
+      },
+    ]
+  },
   options: {
     responsive: true,
     indexAxis: 'y',  // Makes bars horizontal
