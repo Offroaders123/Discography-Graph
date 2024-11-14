@@ -16,6 +16,12 @@ const data = {
     'Drums',
   ],
   datasets: [
+    // Band Members
+    {
+      label: "Rod Tyler",
+      backgroundColor: 'red',
+      data: [{ x: '1994-01-01', y: 'Vocals', x2: '1995-01-01' }]
+    },
     {
       label: "Russell Allen",
       backgroundColor: 'red',
@@ -26,7 +32,11 @@ const data = {
       backgroundColor: 'green',
       data: [{ x: '1994-01-01', y: 'Guitar', x2: 'present' }]
     },
-    // Add other band members as needed
+    {
+      label: "Michael Pinnella",
+      backgroundColor: 'purple',
+      data: [{ x: '1994-01-01', y: 'Keyboards', x2: 'present' }]
+    },
   ]
 };
 
@@ -108,4 +118,5 @@ const config = {
   }
 };
 
+// Render the chart
 new Chart(ctx, config);
