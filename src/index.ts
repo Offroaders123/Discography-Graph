@@ -71,6 +71,7 @@ const config = {
   data: data,
   options: {
     responsive: true,
+    indexAxis: 'y',  // Makes bars horizontal
     scales: {
       x: {
         type: 'time',
@@ -92,7 +93,8 @@ const config = {
         title: {
           display: true,
           text: 'Band Members & Releases'
-        }
+        },
+        reverse: true // Reverses the order to align with the typical timeline
       }
     },
     plugins: {
