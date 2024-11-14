@@ -40,8 +40,41 @@ const data = {
   ]
 };
 
-// Chart configuration
-const config = {
+function annotation({ type, date }: { type: "studio" | "other"; date: string; }) {
+  switch (type) {
+    case "studio": return {
+      type: 'line',
+      mode: 'vertical',
+      scaleID: 'x',
+      value: date,
+      borderColor: 'black',
+      borderWidth: 2,
+      label: {
+        content: 'Studio Album',
+        enabled: true,
+        position: 'top',
+        backgroundColor: 'rgba(0,0,0,0.8)'
+      }
+    };
+    case "other": return {
+      type: 'line',
+      mode: 'vertical',
+      scaleID: 'x',
+      value: date,
+      borderColor: 'gray',
+      borderWidth: 2,
+      label: {
+        content: 'other Release',
+        enabled: true,
+        position: 'top',
+        backgroundColor: 'rgba(128,128,128,0.8)'
+      }
+    };
+  }
+}
+
+// Render the chart
+new Chart(ctx, {
   type: 'bar',
   data: data,
   options: {
@@ -83,40 +116,21 @@ const config = {
       },
       annotation: {
         annotations: [
-          {
-            type: 'line',
-            mode: 'vertical',
-            scaleID: 'x',
-            value: '1994-06-01',
-            borderColor: 'gray',
-            borderWidth: 2,
-            label: {
-              content: 'Demo Release',
-              enabled: true,
-              position: 'top',
-              backgroundColor: 'rgba(128,128,128,0.8)'
-            }
-          },
-          {
-            type: 'line',
-            mode: 'vertical',
-            scaleID: 'x',
-            value: '1994-12-06',
-            borderColor: 'black',
-            borderWidth: 2,
-            label: {
-              content: 'Studio Album',
-              enabled: true,
-              position: 'top',
-              backgroundColor: 'rgba(0,0,0,0.8)'
-            }
-          },
+          { date: '1994-12-06', type: 'studio' as const },
+          { date: '1995-11-06', type: 'studio' as const },
+          { date: '1996-11-01', type: 'studio' as const },
+          { date: '1998-03-13', type: 'studio' as const },
+          { date: '2000-10-09', type: 'studio' as const },
+          { date: '2002-11-04', type: 'studio' as const },
+          { date: '2007-06-26', type: 'studio' as const },
+          { date: '2011-06-17', type: 'studio' as const },
+          { date: '2015-07-24', type: 'studio' as const },
+          { date: '1994-06-01', type: 'other' as const },
+          { date: '1999-02-02', type: 'other' as const },
+          { date: '2001-11-13', type: 'other' as const },
           // Add more annotations as needed for other releases
-        ]
+        ].map(entry => annotation(entry))
       }
     }
   }
-};
-
-// Render the chart
-new Chart(ctx, config);
+});
