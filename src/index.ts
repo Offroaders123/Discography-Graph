@@ -1,3 +1,6 @@
+import "../node_modules/chart.js/dist/chart.umd.js";
+import "../node_modules/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js";
+
 const releaseData = [
   { date: "2016-08-23", title: "Made in merica" },
   { date: "2016-11-14", title: "Ultimate Chaos" },
