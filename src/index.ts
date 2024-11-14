@@ -1,8 +1,8 @@
-import { Chart, TimeScale, LinearScale, PointElement, Tooltip } from "chart.js";
+import { Chart, ScatterController, TimeScale, LinearScale, PointElement, Tooltip } from "chart.js";
 import "chartjs-adapter-date-fns";
 
 // Register the necessary components
-Chart.register(TimeScale, LinearScale, PointElement, Tooltip);
+Chart.register(ScatterController, TimeScale, LinearScale, PointElement, Tooltip);
 
 const releaseData = [
   { date: "2016-08-23", title: "Made in merica" },
