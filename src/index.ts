@@ -1,67 +1,32 @@
-import { Chart, BarController, BarElement, CategoryScale, LinearScale, TimeScale, Tooltip, Legend, ScatterController, PointElement } from 'chart.js';
+import { Chart, registerables } from 'chart.js';
 import 'chartjs-adapter-date-fns';
+import annotationPlugin from 'chartjs-plugin-annotation';
 
-Chart.register(PointElement, ScatterController, BarController, BarElement, CategoryScale, LinearScale, TimeScale, Tooltip, Legend);
+Chart.register(...registerables, annotationPlugin);
 
 const ctx = document.getElementById('releaseTimeline').getContext('2d');
 
 // Data configuration
 const data = {
+  labels: [
+    'Vocals',
+    'Guitar',
+    'Keyboards',
+    'Bass',
+    'Drums',
+  ],
   datasets: [
-    // Band Members
-    {
-      label: "Rod Tyler",
-      backgroundColor: 'red',
-      data: [{ x: '1994-01-01', y: 'Vocals' }, { x: '1995-01-01', y: 'Vocals' }]
-    },
     {
       label: "Russell Allen",
       backgroundColor: 'red',
-      data: [{ x: '1995-01-01', y: 'Vocals' }, { x: '2024-01-01', y: 'Vocals' }]
+      data: [{ x: '1995-01-01', y: 'Vocals', x2: 'present' }]
     },
     {
       label: "Michael Romeo",
       backgroundColor: 'green',
-      data: [{ x: '1994-01-01', y: 'Guitar' }, { x: '2024-01-01', y: 'Guitar' }]
+      data: [{ x: '1994-01-01', y: 'Guitar', x2: 'present' }]
     },
-    {
-      label: "Michael Pinnella",
-      backgroundColor: 'purple',
-      data: [{ x: '1994-01-01', y: 'Keyboards' }, { x: '2024-01-01', y: 'Keyboards' }]
-    },
-    // Releases
-    {
-      type: 'scatter',
-      label: 'Studio Album',
-      pointBackgroundColor: 'black',
-      pointBorderColor: 'black',
-      data: [
-        { x: '1994-12-06', y: 'Albums' },
-        { x: '1995-11-06', y: 'Albums' },
-        { x: '1996-11-01', y: 'Albums' },
-        { x: '1998-03-13', y: 'Albums' },
-        { x: '2000-10-09', y: 'Albums' },
-        { x: '2002-11-04', y: 'Albums' },
-        { x: '2007-06-26', y: 'Albums' },
-        { x: '2011-06-17', y: 'Albums' },
-        { x: '2015-07-24', y: 'Albums' },
-      ],
-      showLine: false,
-      pointRadius: 5,
-    },
-    {
-      type: 'scatter',
-      label: 'Other Release',
-      pointBackgroundColor: 'gray',
-      pointBorderColor: 'gray',
-      data: [
-        { x: '1994-06-01', y: 'Albums' },
-        { x: '1999-02-02', y: 'Albums' },
-        { x: '2001-11-13', y: 'Albums' },
-      ],
-      showLine: false,
-      pointRadius: 5,
-    }
+    // Add other band members as needed
   ]
 };
 
@@ -89,10 +54,10 @@ const config = {
       },
       y: {
         type: 'category',
-        labels: ['Vocals', 'Guitar', 'Keyboards', 'Bass', 'Drums', 'Albums'],
+        labels: ['Vocals', 'Guitar', 'Keyboards', 'Bass', 'Drums'],
         title: {
           display: true,
-          text: 'Band Members & Releases'
+          text: 'Band Members'
         },
         reverse: true // Reverses the order to align with the typical timeline
       }
@@ -105,10 +70,42 @@ const config = {
         callbacks: {
           label: (context) => context.raw?.title || context.dataset.label
         }
+      },
+      annotation: {
+        annotations: [
+          {
+            type: 'line',
+            mode: 'vertical',
+            scaleID: 'x',
+            value: '1994-06-01',
+            borderColor: 'gray',
+            borderWidth: 2,
+            label: {
+              content: 'Demo Release',
+              enabled: true,
+              position: 'top',
+              backgroundColor: 'rgba(128,128,128,0.8)'
+            }
+          },
+          {
+            type: 'line',
+            mode: 'vertical',
+            scaleID: 'x',
+            value: '1994-12-06',
+            borderColor: 'black',
+            borderWidth: 2,
+            label: {
+              content: 'Studio Album',
+              enabled: true,
+              position: 'top',
+              backgroundColor: 'rgba(0,0,0,0.8)'
+            }
+          },
+          // Add more annotations as needed for other releases
+        ]
       }
     }
   }
 };
 
-// Render the chart
 new Chart(ctx, config);
