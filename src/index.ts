@@ -60,14 +60,14 @@ new Chart(ctx, {
         label: "Rod Tyler",
         backgroundColor: 'red',
         data: [
-          [new Date('1994-01-01'), new Date('1995-01-01')]
+          ['1994-01-01', '1995-01-01']
         ]
       },
       {
         label: "Russell Allen",
         backgroundColor: 'red',
         data: [
-          [new Date('1995-01-01'), new Date(today)]
+          ['1995-01-01', today]
         ]
       },
       {
@@ -75,7 +75,7 @@ new Chart(ctx, {
         backgroundColor: 'green',
         data: [
           null,
-          [new Date('1994-01-01'), new Date(today)]
+          ['1994-01-01', today]
         ]
       },
       {
@@ -85,10 +85,10 @@ new Chart(ctx, {
           null,
           null,
           null,
-          [new Date('1994-01-01'), new Date(today)]
+          ['1994-01-01', today]
         ]
       },
-    ] satisfies ChartData<"line", ([Date, Date] | null)[]>["datasets"]
+    ] satisfies ChartData<"line", ([string, string] | null)[]>["datasets"]
   },
   options: {
     responsive: true,
