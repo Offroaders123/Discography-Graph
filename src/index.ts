@@ -8,9 +8,9 @@ const ctx = document.getElementById('releaseTimeline').getContext('2d');
 
 const today: string = new Date().toISOString().split("T")[0]!; // Replace "present" with today's date
 
-function annotation({ type, date }: { type: "studio" | "other"; date: string; }) {
+function annotation({ type, name, date }: { type: "studio" | "other"; name: string; date: string; }): [string, object] {
   switch (type) {
-    case "studio": return {
+    case "studio": return [name, {
       type: 'line',
       mode: 'vertical',
       scaleID: 'x',
@@ -23,8 +23,8 @@ function annotation({ type, date }: { type: "studio" | "other"; date: string; })
         position: 'top',
         backgroundColor: 'rgba(0,0,0,0.8)'
       }
-    };
-    case "other": return {
+    }];
+    case "other": return [name, {
       type: 'line',
       mode: 'vertical',
       scaleID: 'x',
@@ -37,7 +37,7 @@ function annotation({ type, date }: { type: "studio" | "other"; date: string; })
         position: 'top',
         backgroundColor: 'rgba(128,128,128,0.8)'
       }
-    };
+    }];
   }
 }
 
@@ -116,21 +116,21 @@ new Chart(ctx, {
         }
       },
       annotation: {
-        annotations: [
-          { date: '1994-12-06', type: 'studio' as const },
-          { date: '1995-11-06', type: 'studio' as const },
-          { date: '1996-11-01', type: 'studio' as const },
-          { date: '1998-03-13', type: 'studio' as const },
-          { date: '2000-10-09', type: 'studio' as const },
-          { date: '2002-11-04', type: 'studio' as const },
-          { date: '2007-06-26', type: 'studio' as const },
-          { date: '2011-06-17', type: 'studio' as const },
-          { date: '2015-07-24', type: 'studio' as const },
-          { date: '1994-06-01', type: 'other' as const },
-          { date: '1999-02-02', type: 'other' as const },
-          { date: '2001-11-13', type: 'other' as const },
+        annotations: Object.fromEntries([
+          { date: '1994-12-06', name: 'Symphony X', type: 'studio' as const },
+          { date: '1995-11-06', name: 'The Damnation Game', type: 'studio' as const },
+          { date: '1996-11-01', name: 'The Divine Wings of Tragedy', type: 'studio' as const },
+          { date: '1998-03-13', name: 'Twilight in Olympus', type: 'studio' as const },
+          { date: '2000-10-09', name: 'V: The New Mythology Suite', type: 'studio' as const },
+          { date: '2002-11-04', name: 'The Odyssey', type: 'studio' as const },
+          { date: '2007-06-26', name: 'Paradise Lost', type: 'studio' as const },
+          { date: '2011-06-17', name: 'Iconoclast', type: 'studio' as const },
+          { date: '2015-07-24', name: 'Underworld', type: 'studio' as const },
+          { date: '1994-06-01', name: 'The Dark Chapter', type: 'other' as const },
+          { date: '1999-02-02', name: 'Prelude to the Millennium', type: 'other' as const },
+          { date: '2001-11-13', name: 'Live on the Edge of Forever', type: 'other' as const },
           // Add more annotations as needed for other releases
-        ].map(entry => annotation(entry))
+        ].map(entry => annotation(entry)))
       }
     }
   }
