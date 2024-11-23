@@ -60,35 +60,35 @@ new Chart(ctx, {
         label: "Rod Tyler",
         backgroundColor: 'red',
         data: [
-          { x: '1994-01-01', y: 'Vocals' },
-          { x: '1995-01-01', y: 'Vocals' }
+          [new Date('1994-01-01'), new Date('1995-01-01')]
         ]
       },
       {
         label: "Russell Allen",
         backgroundColor: 'red',
         data: [
-          { x: '1995-01-01', y: 'Vocals' },
-          { x: today, y: 'Vocals' }
+          [new Date('1995-01-01'), new Date(today)]
         ]
       },
       {
         label: "Michael Romeo",
         backgroundColor: 'green',
         data: [
-          { x: '1994-01-01', y: 'Guitar' },
-          { x: today, y: 'Guitar' }
+          null,
+          [new Date('1994-01-01'), new Date(today)]
         ]
       },
       {
         label: "Michael Pinnella",
         backgroundColor: 'purple',
         data: [
-          { x: '1994-01-01', y: 'Keyboards' },
-          { x: today, y: 'Keyboards' }
+          null,
+          null,
+          null,
+          [new Date('1994-01-01'), new Date(today)]
         ]
       },
-    ] satisfies ChartData<"line", { x: string; y: string; }[]>["datasets"]
+    ] satisfies ChartData<"line", ([Date, Date] | null)[]>["datasets"]
   },
   options: {
     responsive: true,
