@@ -47,58 +47,104 @@ function annotation({ type, name, date }: { type: "studio" | "other"; name: stri
 new Chart(ctx, {
   type: 'bar',
   data: {
-    labels: ["Project 1", "Project 2"],
+    labels: [
+      'Vocals',
+      'Guitar',
+      'Keyboards',
+      'Bass',
+      'Drums',
+    ],
     datasets: [
+      // Band Members
       {
-        label: 'Task 1',
+        label: "Rod Tyler",
+        backgroundColor: 'red',
         data: [
-          null,
-          [new Date('2021-09-11T00:00:00'), new Date('2021-09-13T00:00:00')]
-        ],
-        backgroundColor: "red",
+          { x: '1994-01-01', y: 'Vocals' },
+          { x: '1995-01-01', y: 'Vocals' }
+        ]
       },
       {
-        label: 'Task 2',
+        label: "Russell Allen",
+        backgroundColor: 'red',
         data: [
-          [new Date('2021-09-12T00:00:00'), new Date('2021-09-14T00:00:00')],
-          [new Date('2021-09-14T00:00:00'), new Date('2021-09-15T00:00:00')]
-        ],
-        backgroundColor: "blue",
+          { x: '1995-01-01', y: 'Vocals' },
+          { x: today, y: 'Vocals' }
+        ]
       },
       {
-        label: 'Task 3',
+        label: "Michael Romeo",
+        backgroundColor: 'green',
         data: [
-          null,
-          [new Date('2021-09-16T00:00:00'), new Date('2021-09-18T00:00:00')]
-        ],
-        backgroundColor: "orange",
+          { x: '1994-01-01', y: 'Guitar' },
+          { x: today, y: 'Guitar' }
+        ]
       },
-    ]
+      {
+        label: "Michael Pinnella",
+        backgroundColor: 'purple',
+        data: [
+          { x: '1994-01-01', y: 'Keyboards' },
+          { x: today, y: 'Keyboards' }
+        ]
+      },
+    ] satisfies ChartData<"line", { x: string; y: string; }[]>["datasets"]
   },
   options: {
-    responsive: false,
-    indexAxis: 'y',
-    plugins: {
-      legend: {
-        position: 'top',
-      },
-      title: {
-        display: true,
-        text: 'Chart.js Floating Horizontal Bar Chart'
-      }
-    },
+    responsive: true,
+    indexAxis: 'y',  // Makes bars horizontal
     scales: {
-      y: {
-        stacked: true
-      },
       x: {
         type: 'time',
         time: {
-          // Luxon format string
-          tooltipFormat: 'DD'
+          unit: 'year',
+          tooltipFormat: 'MMMM dd, yyyy',
+          displayFormats: {
+            year: 'yyyy'
+          }
         },
-        min: new Date('2021-09-11T00:00:00'),
-        max: new Date('2021-09-18T00:00:00')
+        min: '1994-01-01',
+        max: today,
+        title: {
+          display: true,
+          text: 'Timeline'
+        }
+      },
+      y: {
+        type: 'category',
+        labels: ['Vocals', 'Guitar', 'Keyboards', 'Bass', 'Drums'],
+        title: {
+          display: true,
+          text: 'Band Members'
+        },
+        reverse: true // Reverses the order to align with the typical timeline
+      }
+    },
+    plugins: {
+      legend: {
+        position: 'bottom'
+      },
+      tooltip: {
+        callbacks: {
+          label: (context) => context.raw?.title || context.dataset.label
+        }
+      },
+      annotation: {
+        annotations: Object.fromEntries([
+          { date: '1994-12-06', name: 'Symphony X', type: 'studio' as const },
+          { date: '1995-11-06', name: 'The Damnation Game', type: 'studio' as const },
+          { date: '1996-11-01', name: 'The Divine Wings of Tragedy', type: 'studio' as const },
+          { date: '1998-03-13', name: 'Twilight in Olympus', type: 'studio' as const },
+          { date: '2000-10-09', name: 'V: The New Mythology Suite', type: 'studio' as const },
+          { date: '2002-11-04', name: 'The Odyssey', type: 'studio' as const },
+          { date: '2007-06-26', name: 'Paradise Lost', type: 'studio' as const },
+          { date: '2011-06-17', name: 'Iconoclast', type: 'studio' as const },
+          { date: '2015-07-24', name: 'Underworld', type: 'studio' as const },
+          { date: '1994-06-01', name: 'The Dark Chapter', type: 'other' as const },
+          { date: '1999-02-02', name: 'Prelude to the Millennium', type: 'other' as const },
+          { date: '2001-11-13', name: 'Live on the Edge of Forever', type: 'other' as const },
+          // Add more annotations as needed for other releases
+        ].map(entry => annotation(entry)))
       }
     }
   }
