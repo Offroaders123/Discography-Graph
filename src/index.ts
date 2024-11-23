@@ -84,8 +84,60 @@ new Chart(ctx, {
         data: [
           null,
           null,
-          null,
           ['1994-01-01', today]
+        ]
+      },
+      {
+        label: "Thomas Miller",
+        backgroundColor: '#0066cc',
+        data: [
+          null,
+          null,
+          null,
+          ['1994-01-01', '1998-12-31']
+        ]
+      },
+      {
+        label: "Michael LePond",
+        backgroundColor: '#0066cc',
+        data: [
+          null,
+          null,
+          null,
+          ['1999-01-01', today]
+        ]
+      },
+      {
+        label: "Jason Rullo",
+        backgroundColor: '#ff9e23',
+        data: [
+          null,
+          null,
+          null,
+          null,
+          ['1994-01-01', '1997-10-31']
+        ]
+      },
+      // {
+      //   label: "Jason Rullo",
+      //   backgroundColor: '#ff9e23',
+      //   data: [
+      //     null,
+      //     null,
+      //     null,
+      //     null,
+      //     ['1998-01-01', today]
+      //   ]
+      // },
+      {
+        label: "Thomas Walling",
+        backgroundColor: '#ff9e23',
+        data: [
+          null,
+          null,
+          null,
+          null,
+          ['1997-11-01', '1998-12-31']
         ]
       },
     ] satisfies ChartData<"line", ([string, string] | null)[]>["datasets"]
