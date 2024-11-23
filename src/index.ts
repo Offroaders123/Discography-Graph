@@ -6,6 +6,8 @@ Chart.register(...registerables, annotationPlugin);
 
 const ctx = document.getElementById('releaseTimeline').getContext('2d');
 
+const today: string = new Date().toISOString().split("T")[0]!; // Replace "present" with today's date
+
 function annotation({ type, date }: { type: "studio" | "other"; date: string; }) {
   switch (type) {
     case "studio": return {
@@ -60,17 +62,17 @@ new Chart(ctx, {
       {
         label: "Russell Allen",
         backgroundColor: 'red',
-        data: [{ x: '1995-01-01', y: 'Vocals', x2: 'present' }]
+        data: [{ x: '1995-01-01', y: 'Vocals', x2: today }]
       },
       {
         label: "Michael Romeo",
         backgroundColor: 'green',
-        data: [{ x: '1994-01-01', y: 'Guitar', x2: 'present' }]
+        data: [{ x: '1994-01-01', y: 'Guitar', x2: today }]
       },
       {
         label: "Michael Pinnella",
         backgroundColor: 'purple',
-        data: [{ x: '1994-01-01', y: 'Keyboards', x2: 'present' }]
+        data: [{ x: '1994-01-01', y: 'Keyboards', x2: today }]
       },
     ]
   },
@@ -87,6 +89,8 @@ new Chart(ctx, {
             year: 'yyyy'
           }
         },
+        min: '1994-01-01',
+        max: today,
         title: {
           display: true,
           text: 'Timeline'
