@@ -63,13 +63,7 @@ new Chart(ctx, {
         label: "Lead vocals",
         backgroundColor: 'red',
         data: [
-          ['1994-01-01', '1995-01-01']
-        ]
-      },
-      {
-        label: "Lead vocals",
-        backgroundColor: 'red',
-        data: [
+          ['1994-01-01', '1995-01-01'],
           ['1995-01-01', today]
         ]
       },
@@ -77,6 +71,7 @@ new Chart(ctx, {
         label: "Guitars, backing vocals",
         backgroundColor: '#00b200',
         data: [
+          null,
           null,
           ['1994-01-01', today]
         ]
@@ -87,6 +82,7 @@ new Chart(ctx, {
         data: [
           null,
           null,
+          null,
           ['1994-01-01', today]
         ]
       },
@@ -97,16 +93,8 @@ new Chart(ctx, {
           null,
           null,
           null,
-          ['1994-01-01', '1998-12-31']
-        ]
-      },
-      {
-        label: "Bass, backing vocals",
-        backgroundColor: '#0066cc',
-        data: [
           null,
-          null,
-          null,
+          ['1994-01-01', '1998-12-31'],
           ['1999-01-01', today]
         ]
       },
@@ -118,29 +106,11 @@ new Chart(ctx, {
           null,
           null,
           null,
-          ['1994-01-01', '1997-10-31']
-        ]
-      },
-      // {
-      //   label: "Drums",
-      //   backgroundColor: '#ff9e23',
-      //   data: [
-      //     null,
-      //     null,
-      //     null,
-      //     null,
-      //     ['1998-01-01', today]
-      //   ]
-      // },
-      {
-        label: "Drums",
-        backgroundColor: '#ff9e23',
-        data: [
           null,
           null,
-          null,
-          null,
-          ['1997-11-01', '1998-12-31']
+          ['1994-01-01', '1997-10-31'],
+          ['1997-11-01', '1998-12-31'],
+          // ['1998-01-01', today],
         ]
       },
     ] satisfies ChartData<"line", ([string, string] | null)[]>["datasets"]
@@ -166,6 +136,7 @@ new Chart(ctx, {
         }
       },
       y: {
+        stacked: true,
         // type: 'category',
         // labels: ['Vocals', 'Guitar', 'Keyboards', 'Bass', 'Drums'],
         // title: {
