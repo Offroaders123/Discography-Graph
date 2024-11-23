@@ -72,7 +72,7 @@ new Chart(ctx, {
       },
       {
         label: "Michael Romeo",
-        backgroundColor: 'green',
+        backgroundColor: '#00b200',
         data: [
           null,
           ['1994-01-01', today]
@@ -117,7 +117,7 @@ new Chart(ctx, {
           display: true,
           text: 'Band Members'
         },
-        reverse: true // Reverses the order to align with the typical timeline
+        // reverse: true // Reverses the order to align with the typical timeline
       }
     },
     plugins: {
@@ -140,7 +140,6 @@ new Chart(ctx, {
           { date: '2007-06-26', name: 'Paradise Lost', type: 'studio' as const },
           { date: '2011-06-17', name: 'Iconoclast', type: 'studio' as const },
           { date: '2015-07-24', name: 'Underworld', type: 'studio' as const },
-          { date: '1994-06-01', name: 'The Dark Chapter', type: 'other' as const },
           { date: '1999-02-02', name: 'Prelude to the Millennium', type: 'other' as const },
           { date: '2001-11-13', name: 'Live on the Edge of Forever', type: 'other' as const },
           // Add more annotations as needed for other releases
