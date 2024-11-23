@@ -2,6 +2,8 @@ import { Chart, registerables } from 'chart.js';
 import 'chartjs-adapter-date-fns';
 import annotationPlugin from 'chartjs-plugin-annotation';
 
+import type { ChartData } from 'chart.js';
+
 Chart.register(...registerables, annotationPlugin);
 
 const ctx = document.getElementById('releaseTimeline').getContext('2d');
@@ -74,7 +76,7 @@ new Chart(ctx, {
         backgroundColor: 'purple',
         data: [{ x: '1994-01-01', y: 'Keyboards', x2: today }]
       },
-    ]
+    ] satisfies ChartData<"line", { x: string; y: string; x2: string; }[]>["datasets"]
   },
   options: {
     responsive: true,
