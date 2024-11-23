@@ -48,30 +48,33 @@ new Chart(ctx, {
   type: 'bar',
   data: {
     labels: [
-      'Vocals',
-      'Guitar',
-      'Keyboards',
-      'Bass',
-      'Drums',
+      'Rod Tyler',
+      'Russell Allen',
+      'Michael Romeo',
+      'Michael Pinnella',
+      'Thomas Miller',
+      'Michael LePond',
+      'Jason Rullo',
+      'Thomas Walling',
     ],
     datasets: [
       // Band Members
       {
-        label: "Rod Tyler",
+        label: "Lead vocals",
         backgroundColor: 'red',
         data: [
           ['1994-01-01', '1995-01-01']
         ]
       },
       {
-        label: "Russell Allen",
+        label: "Lead vocals",
         backgroundColor: 'red',
         data: [
           ['1995-01-01', today]
         ]
       },
       {
-        label: "Michael Romeo",
+        label: "Guitars, backing vocals",
         backgroundColor: '#00b200',
         data: [
           null,
@@ -79,7 +82,7 @@ new Chart(ctx, {
         ]
       },
       {
-        label: "Michael Pinnella",
+        label: "Keyboards, backing vocals",
         backgroundColor: 'purple',
         data: [
           null,
@@ -88,7 +91,7 @@ new Chart(ctx, {
         ]
       },
       {
-        label: "Thomas Miller",
+        label: "Bass, backing vocals",
         backgroundColor: '#0066cc',
         data: [
           null,
@@ -98,7 +101,7 @@ new Chart(ctx, {
         ]
       },
       {
-        label: "Michael LePond",
+        label: "Bass, backing vocals",
         backgroundColor: '#0066cc',
         data: [
           null,
@@ -108,7 +111,7 @@ new Chart(ctx, {
         ]
       },
       {
-        label: "Jason Rullo",
+        label: "Drums",
         backgroundColor: '#ff9e23',
         data: [
           null,
@@ -119,7 +122,7 @@ new Chart(ctx, {
         ]
       },
       // {
-      //   label: "Jason Rullo",
+      //   label: "Drums",
       //   backgroundColor: '#ff9e23',
       //   data: [
       //     null,
@@ -130,7 +133,7 @@ new Chart(ctx, {
       //   ]
       // },
       {
-        label: "Thomas Walling",
+        label: "Drums",
         backgroundColor: '#ff9e23',
         data: [
           null,
@@ -163,12 +166,12 @@ new Chart(ctx, {
         }
       },
       y: {
-        type: 'category',
-        labels: ['Vocals', 'Guitar', 'Keyboards', 'Bass', 'Drums'],
-        title: {
-          display: true,
-          text: 'Band Members'
-        },
+        // type: 'category',
+        // labels: ['Vocals', 'Guitar', 'Keyboards', 'Bass', 'Drums'],
+        // title: {
+        //   display: true,
+        //   text: 'Band Members'
+        // },
         // reverse: true // Reverses the order to align with the typical timeline
       }
     },
