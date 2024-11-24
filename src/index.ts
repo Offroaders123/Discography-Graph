@@ -56,6 +56,7 @@ new Chart(ctx, {
       'Michael LePond',
       'Jason Rullo',
       'Thomas Walling',
+      'Jason Rullo',
     ],
     datasets: [
       // Band Members
@@ -95,7 +96,7 @@ new Chart(ctx, {
           null,
           null,
           ['1994-01-01', '1998-12-31'],
-          ['1999-01-01', today]
+          ['1999-02-02', today]
         ]
       },
       {
@@ -110,7 +111,7 @@ new Chart(ctx, {
           null,
           ['1994-01-01', '1997-10-31'],
           ['1997-11-01', '1998-12-31'],
-          // ['1998-01-01', today],
+          ['1999-02-02', today],
         ]
       },
     ] satisfies ChartData<"line", ([string, string] | null)[]>["datasets"]
