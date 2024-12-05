@@ -83,25 +83,22 @@ function annotation({ type, name, date }: { type: "studio" | "other"; name: stri
 
 // Render the chart
 new Chart(ctx, {
-  type: "bar",
+  type: "scatter",
   data: {
-    labels: [
-      "Brandon Bennett"
-    ],
-    datasets: [
-      // Band Members
-      {
-        label: "Everything",
-        backgroundColor: "rebeccapurple",
-        data: [
-          ["2016-03-01", today]
-        ]
-      },
-    ] satisfies ChartData<"line", ([string, string] | null)[]>["datasets"]
+    datasets: [{
+      label: "Releases",
+      data: releaseData.map(item => ({
+        x: item.date,
+        y: 1, // Arbitrary y-value since we're only interested in date positioning
+        title: item.name
+      })),
+      pointBackgroundColor: "blue",
+      pointBorderColor: "black",
+      pointRadius: 5,
+      showLine: false,
+    }]
   },
   options: {
-    responsive: true,
-    indexAxis: "y",  // Makes bars horizontal
     scales: {
       x: {
         type: 'time',
@@ -116,20 +113,17 @@ new Chart(ctx, {
         max: today,
         title: {
           display: true,
-          text: "Timeline"
+          text: "Release Date"
         }
       },
       y: {
-        stacked: true
+        display: false // Hide y-axis
       }
     },
     plugins: {
-      legend: {
-        position: "bottom"
-      },
       tooltip: {
         callbacks: {
-          label: (context) => context.dataset.label
+          label: (context) => (context.raw as { x: string; y: number; title: string; }).title // Display album title in tooltip
         }
       },
       annotation: {
