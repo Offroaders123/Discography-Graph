@@ -6,7 +6,7 @@ import type { ChartData } from 'chart.js';
 
 Chart.register(...registerables, annotationPlugin);
 
-const ctx = document.getElementById('releaseTimeline').getContext('2d');
+const ctx: CanvasRenderingContext2D = document.querySelector<HTMLCanvasElement>('#releaseTimeline')!.getContext('2d')!;
 
 const today: string = new Date().toISOString().split("T")[0]!; // Replace "present" with today's date
 
@@ -153,7 +153,7 @@ new Chart(ctx, {
       },
       tooltip: {
         callbacks: {
-          label: (context) => context.raw?.title || context.dataset.label
+          label: (context) => context.dataset.label
         }
       },
       annotation: {
