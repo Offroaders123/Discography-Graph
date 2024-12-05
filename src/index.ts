@@ -1,176 +1,89 @@
-import { Chart, registerables } from 'chart.js';
-import 'chartjs-adapter-date-fns';
-import annotationPlugin from 'chartjs-plugin-annotation';
+import { Chart, ScatterController, TimeScale, LinearScale, PointElement, Tooltip } from "chart.js";
+import "chartjs-adapter-date-fns";
 
-import type { ChartData } from 'chart.js';
+// Register the necessary components
+Chart.register(ScatterController, TimeScale, LinearScale, PointElement, Tooltip);
 
-Chart.register(...registerables, annotationPlugin);
+const releaseData = [
+  { date: "2016-08-23", title: "Made in merica" },
+  { date: "2016-11-14", title: "Ultimate Chaos" },
+  { date: "2017-06-19", title: "Septem Numero" },
+  { date: "2017-08-09", title: "Spectrum" },
+  { date: "2018-11-03", title: "Distant Utopia" },
+  { date: "2019-08-19", title: "Raise to Conflict" },
+  { date: "2021-09-22", title: "Elkosaurus Tex" },
+  { date: "2021-10-15", title: "Corruption Junction" },
+  { date: "2021-11-14", title: "Flatlands" },
+  { date: "2021-12-05", title: "The Midranges" },
+  { date: "2022-01-04", title: "Three Ways to Sunday" },
+  { date: "2022-01-27", title: "Electro Capacitoritor" },
+  { date: "2022-02-05", title: "Abundance" },
+  { date: "2022-02-15", title: "RESERVED A" },
+  { date: "2022-03-09", title: "A Sight to Behold" },
+  { date: "2022-04-05", title: "Streetlight" },
+  { date: "2022-05-21", title: "Laboratory" },
+  { date: "2022-06-13", title: "Scary House" },
+  { date: "2022-08-19", title: "End of Summer" },
+  { date: "2022-10-24", title: "Transcend" },
+  { date: "2022-12-12", title: "Lordsmith" },
+  { date: "2022-12-20", title: "Emotional Literacy" },
+  { date: "2023-01-02", title: "Ooble? Yeah!" },
+  { date: "2023-02-15", title: "Centerland" },
+  { date: "2023-02-19", title: "Nosebleed" },
+  { date: "2023-03-17", title: "Sponge, Assert, Expunge" },
+  { date: "2023-04-05", title: "Sienna" },
+  { date: "2023-05-05", title: "Orange paradox" },
+  { date: "2023-07-06", title: "Catastrophic Failure as a Human Being" },
+  { date: "2023-09-15", title: "so, many, bad, decisions" },
+  { date: "2023-09-15", title: "Colloquial Outtakes" },
+  { date: "2023-09-28", title: "Carpincho" },
+  { date: "2023-10-23", title: "duds" },
+  { date: "2023-11-15", title: "The Reaction Factor" },
+  { date: "2024-02-16", title: "(zein-zein)" },
+];
 
-const ctx: CanvasRenderingContext2D = document.querySelector<HTMLCanvasElement>('#releaseTimeline')!.getContext('2d')!;
-
-const today: string = new Date().toISOString().split("T")[0]!; // Replace "present" with today's date
-
-function annotation({ type, name, date }: { type: "studio" | "other"; name: string; date: string; }): [string, object] {
-  switch (type) {
-    case "studio": return [name, {
-      type: 'line',
-      mode: 'vertical',
-      scaleID: 'x',
-      value: date,
-      borderColor: 'black',
-      borderWidth: 2,
-      label: {
-        content: 'Studio Album',
-        enabled: true,
-        position: 'top',
-        backgroundColor: 'rgba(0,0,0,0.8)'
-      }
-    }];
-    case "other": return [name, {
-      type: 'line',
-      mode: 'vertical',
-      scaleID: 'x',
-      value: date,
-      borderColor: 'gray',
-      borderWidth: 2,
-      label: {
-        content: 'other Release',
-        enabled: true,
-        position: 'top',
-        backgroundColor: 'rgba(128,128,128,0.8)'
-      }
-    }];
-  }
-}
-
-// Render the chart
+const ctx: CanvasRenderingContext2D = document.querySelector<HTMLCanvasElement>("#releaseTimeline")!.getContext("2d")!;
 new Chart(ctx, {
-  type: 'bar',
+  type: "scatter",
   data: {
-    labels: [
-      'Rod Tyler',
-      'Russell Allen',
-      'Michael Romeo',
-      'Michael Pinnella',
-      'Thomas Miller',
-      'Michael LePond',
-      'Jason Rullo',
-      'Thomas Walling',
-      'Jason Rullo',
-    ],
-    datasets: [
-      // Band Members
-      {
-        label: "Lead vocals",
-        backgroundColor: 'red',
-        data: [
-          ['1994-01-01', '1995-01-01'],
-          ['1995-01-01', today]
-        ]
-      },
-      {
-        label: "Guitars, backing vocals",
-        backgroundColor: '#00b200',
-        data: [
-          null,
-          null,
-          ['1994-01-01', today]
-        ]
-      },
-      {
-        label: "Keyboards, backing vocals",
-        backgroundColor: 'purple',
-        data: [
-          null,
-          null,
-          null,
-          ['1994-01-01', today]
-        ]
-      },
-      {
-        label: "Bass, backing vocals",
-        backgroundColor: '#0066cc',
-        data: [
-          null,
-          null,
-          null,
-          null,
-          ['1994-01-01', '1998-12-31'],
-          ['1999-02-02', today]
-        ]
-      },
-      {
-        label: "Drums",
-        backgroundColor: '#ff9e23',
-        data: [
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          ['1994-01-01', '1997-10-31'],
-          ['1997-11-01', '1998-12-31'],
-          ['1999-02-02', today],
-        ]
-      },
-    ] satisfies ChartData<"line", ([string, string] | null)[]>["datasets"]
+    datasets: [{
+      label: "Releases",
+      data: releaseData.map(item => ({
+        x: item.date,
+        y: 1, // Arbitrary y-value since we're only interested in date positioning
+        title: item.title
+      })),
+      pointBackgroundColor: "blue",
+      pointBorderColor: "black",
+      pointRadius: 5,
+      showLine: false,
+    }]
   },
   options: {
-    responsive: true,
-    indexAxis: 'y',  // Makes bars horizontal
     scales: {
       x: {
         type: 'time',
         time: {
-          unit: 'year',
-          tooltipFormat: 'MMMM dd, yyyy',
+          unit: 'month', // Choose the unit granularity
+          tooltipFormat: 'MMMM dd, yyyy', // Format for tooltip dates
           displayFormats: {
-            year: 'yyyy'
+            month: 'MMM yyyy' // Format for x-axis labels
           }
         },
-        min: '1994-01-01',
-        max: today,
         title: {
           display: true,
-          text: 'Timeline'
+          text: "Release Date"
         }
       },
       y: {
-        stacked: true,
-        // type: 'category',
-        // labels: ['Vocals', 'Guitar', 'Keyboards', 'Bass', 'Drums'],
-        // title: {
-        //   display: true,
-        //   text: 'Band Members'
-        // },
-        // reverse: true // Reverses the order to align with the typical timeline
+        display: false // Hide y-axis
       }
     },
     plugins: {
-      legend: {
-        position: 'bottom'
-      },
       tooltip: {
         callbacks: {
-          label: (context) => context.dataset.label
+          label: (context) => (context.raw as { x: string; y: number; title: string; }).title // Display album title in tooltip
         }
-      },
-      annotation: {
-        annotations: Object.fromEntries([
-          { date: '1994-12-06', name: 'Symphony X', type: 'studio' as const },
-          { date: '1995-11-06', name: 'The Damnation Game', type: 'studio' as const },
-          { date: '1996-11-01', name: 'The Divine Wings of Tragedy', type: 'studio' as const },
-          { date: '1998-03-13', name: 'Twilight in Olympus', type: 'studio' as const },
-          { date: '2000-10-09', name: 'V: The New Mythology Suite', type: 'studio' as const },
-          { date: '2002-11-04', name: 'The Odyssey', type: 'studio' as const },
-          { date: '2007-06-26', name: 'Paradise Lost', type: 'studio' as const },
-          { date: '2011-06-17', name: 'Iconoclast', type: 'studio' as const },
-          { date: '2015-07-24', name: 'Underworld', type: 'studio' as const },
-          { date: '1999-02-02', name: 'Prelude to the Millennium', type: 'other' as const },
-          { date: '2001-11-13', name: 'Live on the Edge of Forever', type: 'other' as const },
-          // Add more annotations as needed for other releases
-        ].map(entry => annotation(entry)))
       }
     }
   }
